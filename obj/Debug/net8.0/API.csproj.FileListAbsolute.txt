@@ -82,3 +82,4 @@
 /Users/maxym/Documents/HPK/4_KURS/APPZ/LR2/API_LR9/API/bin/Debug/net8.0/runtimes/win-x64/native/krb5_64.dll
 /Users/maxym/Documents/HPK/4_KURS/APPZ/LR2/API_LR9/API/bin/Debug/net8.0/runtimes/win-x64/native/krbcc64.dll
 /Users/maxym/Documents/HPK/4_KURS/APPZ/LR2/API_LR9/API/bin/Debug/net8.0/runtimes/win/lib/net8.0/System.Windows.Extensions.dll
+/Users/maxym/Documents/HPK/4_KURS/APPZ/LR2/API_LR9/API/obj/Debug/net8.0/API.sourcelink.json

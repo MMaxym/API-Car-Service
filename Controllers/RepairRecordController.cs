@@ -71,17 +71,6 @@ namespace API.Controllers
             return Ok(new { message = "Запис про ремонт успішно видалено!" });
         }
         
-        [HttpPatch("{id}/change-status")]
-        public async Task<IActionResult> ChangeStatus(Guid id, [FromForm] ChangeStatusDTO changeStatusDto)
-        {
-            var result = await _repairRecordService.ChangeStatus(id, changeStatusDto);
-            if (!result)
-            {
-                return NotFound(new { message = "Запис ремонту не знайдено" });
-            }
-            return Ok(new { message = "Статус успішно оновлено !" });
-        }
-        
         [HttpPatch("{id}/change-master")]
         public async Task<IActionResult> ChangeMaster(Guid id, [FromForm] ChangeMasterDTO changeMasterDto)
         {
@@ -93,7 +82,7 @@ namespace API.Controllers
             return Ok(new { message = "Майстра успішно оновлено !" });
         }
         
-        [HttpPatch("{id}/edit-scheduled-date")]
+        [HttpPatch("{id}/change-scheduled-date")]
         public async Task<IActionResult> EditScheduledDate(Guid id, [FromForm] EditScheduledDateDTO editScheduledDateDto)
         {
             var result = await _repairRecordService.EditScheduledDate(id, editScheduledDateDto);
@@ -103,6 +92,41 @@ namespace API.Controllers
             }
             return Ok(new { message = "Заплановану дату ремонту успішно оновлено !" });
         }
+        
+        [HttpPatch("{id}/change-status")]
+        public async Task<IActionResult> ChangeStatus(Guid id, [FromForm] ChangeStatusDTO changeStatusDto)
+        {
+            var result = await _repairRecordService.ChangeStatus(id, changeStatusDto);
+            if (!result)
+            {
+                return NotFound(new { message = "Запис ремонту не знайдено" });
+            }
+            return Ok(new { message = "Статус успішно оновлено !" });
+        }
+        
+        [HttpPatch("{id}/change-cost")]
+        public async Task<IActionResult> ChangeCost(Guid id, [FromForm] ChangeCostDTO changeCostDto)
+        {
+            var result = await _repairRecordService.ChangeCost(id, changeCostDto);
+            if (!result)
+            {
+                return NotFound(new { message = "Запис ремонту не знайдено" });
+            }
+            return Ok(new { message = "Вартість ремонту успішно оновлено !" });
+        }
 
+        [HttpGet("filter-by-date")]
+        public async Task<ActionResult<List<RepairRecordDTO>>> GetRepairRecordsByDate([FromQuery] DateTime date)
+        {
+            var repairRecords = await _repairRecordService.GetRepairRecordsByDate(date);
+            return Ok(repairRecords);
+        }
+
+        [HttpGet("filter-by-status")]
+        public async Task<ActionResult<List<RepairRecordDTO>>> GetRepairRecordsByStatus([FromQuery] string status)
+        {
+            var repairRecords = await _repairRecordService.GetRepairRecordsByStatus(status);
+            return Ok(repairRecords);
+        }
     }
 }

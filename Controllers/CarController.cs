@@ -27,7 +27,6 @@ namespace API.Controllers
             var cars = await _carService.GetAllCars();
             return Ok(cars);
         }
-
        
         [HttpGet("{id}")]
         public async Task<ActionResult<Car>> GetCarById(Guid id)
@@ -54,7 +53,6 @@ namespace API.Controllers
                 new { id = carDto.UserId }, 
                 new { message = "Автомобіль успішно створений!", car = carDto });
         }
-
         
         [HttpPut("{id}")]
         public async Task<ActionResult> UpdateCar(Guid id, [FromBody] CreateCarDTO carDto)
@@ -66,19 +64,7 @@ namespace API.Controllers
 
             return Ok(new { message = "Автомобіль успішно оновлено !" });
         }
-
-        
-        [HttpDelete("{id}")]
-        public async Task<ActionResult> DeleteCar(Guid id)
-        {
-            var result = await _carService.DeleteCar(id);
-            if (!result)
-                return NotFound("Автомобіль з таким ID не існує !!!"); 
-
-            return Ok(new { message = "Автомобіль успішно видалено !" });
-        }
-        
-        
+         
         [HttpPatch("{id}/changeOwner")]
         public async Task<ActionResult> ChangeCarOwner(Guid id, [FromForm] ChangeOwnerDTO changeOwnerDto)
         {
@@ -88,6 +74,16 @@ namespace API.Controllers
                 return BadRequest("Не вдалося змінити власника автомобіля. Перевірте правильність ID автомобіля або користувача."); 
 
             return Ok(new { message = "Власник автомобіля успішно змінений!" });
+        }
+        
+        [HttpDelete("{id}")]
+        public async Task<ActionResult> DeleteCar(Guid id)
+        {
+            var result = await _carService.DeleteCar(id);
+            if (!result)
+                return NotFound("Автомобіль з таким ID не існує !!!"); 
+
+            return Ok(new { message = "Автомобіль успішно видалено !" });
         }
     }
 }
